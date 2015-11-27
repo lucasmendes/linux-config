@@ -1,0 +1,53 @@
+[user]
+	name = Lucas Martin Giacomini Mendes
+	email = lucas@padtec.com.br
+[color]
+	ui = auto
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto
+[alias]
+	st = status
+	ci = commit
+	ad = !git add --all . && git add -u
+	br = !git branch -avv && git tag -n
+	co = checkout
+	mg = merge --no-ff
+	df = diff
+	dc = diff --cached
+	lg   = log --graph --pretty=format:'%Cred%h%Creset -%C(red)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --all
+	lgst = log --graph --pretty=format:'%Cred%h%Creset -%C(red)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --all --stat
+	lgbr = log --graph --pretty=format:'%Cred%h%Creset -%C(red)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	ls = ls-files
+  in = !git fetch && git fetch --tags && echo 'From: origin/\n' && git lgbr ..@{u}
+  out = !echo 'To: origin/\n' && git lgbr @{u}..
+	inout = !git in && git out
+	unadd = reset HEAD --
+	unstage = !git unadd
+	ign = ls-files -o -i --exclude-standard # Show files ignored by git
+	ss = stash
+	ss-unapply = !git stash show -p | git apply -R
+	stash-unapply = !git stash show -p | git apply -R
+	track = branch --set-upstream-to
+[merge]
+        tool = mymeld
+        conflictstyle = diff3
+[mergetool "mymeld"]
+#       cmd = meld --diff $BASE $LOCAL --diff $BASE $REMOTE --diff $LOCAL $BASE $REMOTE $MERGED
+        cmd = meld --diff $LOCAL $MERGED $REMOTE
+[mergetool]
+	keepBackup = false
+[credential]
+	helper = store
+[push]
+	default = matching
+[url "ssh://lucas@git.padtec.com.br/l/disk0/git/repos/"]
+        insteadOf = https://lucas@git.padtec.com.br/r/
+[url "https://lucas@git.padtec.com.br/r/"]
+        pushInsteadOf = https://lucas@git.padtec.com.br/r/
+#[url "ssh://lucas@git.padtec.com.br/l/disk0/git/repos/"]
+#        pushInsteadOf = https://lucas@git.padtec.com.br/r/
+
+[http]
+	postBuffer = 524288000

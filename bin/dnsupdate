@@ -1,0 +1,14 @@
+#!/bin/sh
+
+if [ $# -ne 1 ]; then
+  echo "Usage: $(basename $0) interface"
+  exit 1
+fi
+
+ADDR=`/sbin/ifconfig "$1" | grep 'inet ' | awk '{print $3}' | sed -e s/.*://`
+HOST=`hostname -f`
+echo "update delete $HOST A" > /tmp/nsupdate.txt
+echo "update add $HOST 86400 A $ADDR" >> /tmp/nsupdate.txt
+echo "send" >> /tmp/nsupdate.txt
+nsupdate /tmp/nsupdate.txt
+

@@ -1,0 +1,3 @@
+#!/bin/sh
+/opt/arm/arm-2009q1-203-arm-none-linux-gnueabi/bin/arm-none-linux-gnueabi-objdump -x $1 | grep NEEDED
+
